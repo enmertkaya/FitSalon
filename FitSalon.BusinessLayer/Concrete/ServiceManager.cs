@@ -1,5 +1,6 @@
 ﻿using FitSalon.BusinessLayer.Abstract;
 using FitSalon.DataAccessLayer.Abstract;
+using FitSalon.DataAccessLayer.EntityFramework;
 using FitSalon.EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
