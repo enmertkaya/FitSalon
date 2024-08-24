@@ -45,10 +45,10 @@ namespace FitSalon.DataAccessLayer.Concrete
         public DbSet<About2> Abouts2 { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<ContactUs> ContactUses { get; set; }
-        public DbSet<Service> Destinations { get; set; }
+        public DbSet<Service> Services { get; set; }
         public DbSet<Feature1> Features1 { get; set; }
         public DbSet<Feature2> Features2 { get; set; }
-        public DbSet<Employee> Guides { get; set; }
+        public DbSet<Employee> Employees { get; set; }
         public DbSet<Newsletter> Newsletters { get; set; }
         public DbSet<SubAbout> SubAbouts { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }

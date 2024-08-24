@@ -15,7 +15,7 @@ namespace FitSalon.EntityLayer.Concrete
         public DateTime CommentDate { get; set; }
         public string CommentContent { get; set; }
         public bool CommentStatus { get; set; }
-        public int DestinationID { get; set; }  
+        public int ServiceID { get; set; }  
         public Service Service { get; set; }
         public int AppUserID { get; set; }
         public AppUser AppUser { get; set; }
