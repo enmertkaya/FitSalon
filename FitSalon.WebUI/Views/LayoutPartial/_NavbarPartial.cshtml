@@ -1,0 +1,160 @@
+﻿<header id="site-header" class="fixed-top">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg stroke">
+            <h1>
+                <a class="navbar-brand mr-lg-5" href="\Default\Index">
+                    Inoshape
+                </a>
+            </h1>
+            <button class="navbar-toggler collapsed bg-gradient" type="button" data-toggle="collapse"
+                    data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Default/Index">Ana Sayfa <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/About/Index">Hakkımızda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Service/Index">Rotalar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Packets/Index">Paketler</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Employee/Index">Rehberler</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Contact/Index">İletişim</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="d-lg-block d-none">
+                <a href="/Login/SignIn" class="btn btn-style btn-secondary">Rezervasyon Yap</a>
+            </div>
+
+            <div class="d-flex align-items-center">
+                <button id="userButton" class="btn btn-danger mx-2">
+                    <i class="fa fa-user-circle"></i>
+                </button>
+                <div id="userDropdown" class="dropdown-menu1 dropdown-menu-right">
+                    @if (User.Identity.IsAuthenticated == true)
+                    {
+                        <a class="dropdown-item1" href="/Member/Dashboard">Üye Profili</a>
+                        <a class="dropdown-item1" href="#" id="logoutLink">Çıkış Yap</a>
+                    }
+                    else
+                    {
+                        <a class="dropdown-item1" href="/Login/SignIn">Giriş Yap</a>
+                        <a class="dropdown-item1" href="/Login/SignUp">Kayıt Ol</a>
+                    }
+                </div>
+
+                <div class="theme-switch-wrapper mx-2">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox">
+                        <div class="mode-container">
+                            <i class="gg-sun"></i>
+                            <i class="gg-moon"></i>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </nav>
+
+        <form id="logoutForm" action="/Login/Logout" method="post" style="display: none;">
+            @Html.AntiForgeryToken()
+        </form>
+    </div>
+</header>
+
+<style>
+    /* User button styles (same as Rezervasyon Yap) */
+    .btn-danger1 {
+        background-color: #f84a3e; /* Rezervasyon yap buton rengi */
+        border-color: #f84a3e;
+        border-radius: 5px;
+        padding: 10px 20px; /* İç boşluk */
+        color: white; /* Yazı rengi */
+        font-size: 20px; /* İkon boyutu */
+        cursor: pointer; /* İmleç işareti */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative; /* Dropdown için konumlandırma */
+    }
+
+    /* Dropdown styles */
+    .dropdown-menu1 {
+        display: none; /* Başlangıçta gizli */
+        position: absolute;
+        top: 100%; /* Butonun hemen altında */
+        left: 0; /* Butonun sol kenarına hizalanacak */
+        transform: translateY(10px); /* Biraz aşağı kaydır */
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        min-width: 150px; /* Minimum genişlik */
+        max-width: 200px;
+        padding: 0; /* İç dolgu kaldırıldı */
+    }
+
+    .show {
+        display: block; /* Dropdown menüyü göster */
+    }
+
+    .dropdown-item1 {
+        padding: 8px 15px; /* Dropdown seçeneklerinin iç dolgu miktarı azaltıldı */
+        color: #333;
+        text-decoration: none;
+        display: block;
+        border-bottom: none;
+        background-color: transparent; /* Arka planı transparan yap */
+    }
+
+        .dropdown-item1:hover {
+            background-color: transparent !important; /* Arka plan rengini devre dışı bırak */
+            color: inherit !important; /* Yazı rengini devre dışı bırak */
+            text-decoration: none !important; /* Alt çizgiyi devre dışı bırak */
+        }
+
+    /* Adjust theme switch wrapper position */
+    .theme-switch-wrapper1 {
+        margin-left: 10px; /* Gece modu anahtarının butona daha yakın olması için */
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var userButton = document.getElementById('userButton');
+        var userDropdown = document.getElementById('userDropdown');
+
+        userButton.addEventListener('click', function () {
+            if (userDropdown.classList.contains('show')) {
+                userDropdown.classList.remove('show');
+            } else {
+                userDropdown.classList.add('show');
+            }
+        });
+
+        document.addEventListener('click', function (event) {
+            if (!userButton.contains(event.target) && !userDropdown.contains(event.target)) {
+                userDropdown.classList.remove('show');
+            }
+        });
+
+        document.getElementById("logoutLink").addEventListener("click", function (event) {
+            event.preventDefault();
+            document.getElementById("logoutForm").submit();
+        });
+    });
+</script>

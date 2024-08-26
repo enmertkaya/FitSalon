@@ -33,6 +33,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FitSalon.BusinessLayer\FitSalon.BusinessLayer.csproj" />
     <ProjectReference Include="..\FitSalon.DataAccessLayer\FitSalon.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\FitSalon.DtoLayer\FitSalon.DtoLayer.csproj" />
     <ProjectReference Include="..\FitSalon.EntityLayer\FitSalon.EntityLayer.csproj" />
   </ItemGroup>
 

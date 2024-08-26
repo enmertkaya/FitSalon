@@ -1,0 +1,371 @@
+﻿<footer>
+    <!-- footer -->
+    <section class="w3l-footer">
+        <div class="w3l-footer-16-main py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 d-flex flex-column align-items-center">
+                        <div class="row w-100">
+                            <div class="col-md-4 text-center">
+                                <h3>Navigasyon</h3>
+                                <ul class="footer-gd-16">
+                                    <li><a href="/Default/Index">Ana Sayfa</a></li>
+                                    <li><a href="#">Hizmet ve Şartlar</a></li>
+                                    <li><a href="#">Gizlilik Politikası</a></li>
+                                    <li><a href="/Contact/Index">Bize Ulaşın</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4 text-center mt-md-0 mt-4">
+                                <h3>Çalışmalarımız</h3>
+                                <ul class="footer-gd-16">
+                                    <li><a href="/About/Index">Hakkımızda</a></li>
+                                    <li><a href="/Service/Index">İş Yerleri</a></li>
+                                    <li><a href="/Employee/Index">Çalışanlar</a></li>
+                                    <li><a href="/Packets/Index">Paketlerimiz</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4 text-center mt-md-0 mt-4">
+                                <h3>Faydalı Linkler</h3>
+                                <ul class="footer-gd-16">
+                                    <li><a href="/TCMBCurrency/Index">Döviz Kurları</a></li>
+                                    <li><a href="/IMDBMovie/Index">IMDB En İyi 100 Film</a></li>
+                                    <li><a href="#">Bilmeniz Gerekenler</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 text-center pl-lg-5 column4 mt-lg-0 mt-5">
+                        <h3>Bültene Abone Ol</h3>
+                        <div class="end-column">
+                            <h4>Kampanya ve indirimlerimizden haberdar olmak için abone olun.</h4>
+                            <form action="#" class="subscribe" method="post">
+                                <input type="email" name="email" placeholder="E-posta Adresiniz" required="">
+                                <button type="submit">Abone Ol</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center pt-4 mt-5 text-center">
+                    <div class="text-lg-left">
+                        <p>
+                            &copy;@DateTime.Now.Year Tüm hakları saklıdır. Edited by <a href="https://enesmertkaya.com" target="_blank">Enes Mert Kaya</a>
+                        </p>
+                    </div>
+                    <div class="mt-lg-0 mt-3">
+                        <ul class="social d-flex justify-content-center list-unstyled">
+                            <li>
+                                <a href="#facebook"><span class="fa fa-facebook" aria-hidden="true"></span></a>
+                            </li>
+                            <li>
+                                <a href="#instagram"><span class="fa fa-instagram" aria-hidden="true"></span></a>
+                            </li>
+                            <li>
+                                <a href="#linkedin"><span class="fa fa-linkedin" aria-hidden="true"></span></a>
+                            </li>
+                            <li>
+                                <a href="#twitter"><span class="fa fa-twitter" aria-hidden="true"></span></a>
+                            </li>
+                            <li>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Traversal Asistan -->
+        <button id="movetop" title="Inoshape AI Asistan'ı Aç'">
+            <span class="fa fa-comments"></span>
+        </button>
+
+        <div id="chatbox" style="display:none;">
+            <div id="chatboxHeader">
+                Inoshape AI Asistan
+                <button id="closeChatbox" title="Inoshape AI Asistan'ı Kapat'">
+                    <span class="fa fa-times"></span>
+                </button>
+            </div>
+            <div id="chatboxMessages">
+                <!-- Welcome message -->
+                <div class="message bot-message">Merhaba 👋</div>
+                <div class="message bot-message">Ben Inoshape AI Asistan. Aklınızdaki soruların cevabını benden alabilirsiniz, örneğin spor planınızı hazırlayabilir veya nerde nasıl spor yapılır önerisinde bulunabilirim. :)</div>
+                <div id="loadingMessage" style="display: none;" class="message bot-message">...</div>
+
+            </div>
+            <div id="chatboxInput">
+                <input type="text" id="userMessage" placeholder="Mesajınızı yazın...">
+                <button id="sendMessage" title="Send">
+                    <span class="fa fa-paper-plane"></span>
+                </button>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Show or hide the chatbot icon based on scroll position
+                document.getElementById("movetop").style.display = "block";
+
+                // Toggle chatbot visibility
+                document.getElementById("movetop").onclick = function () {
+                    toggleChatbot();
+                };
+
+                // Close chatbot
+                document.getElementById("closeChatbox").onclick = function () {
+                    toggleChatbot();
+                };
+
+                function toggleChatbot() {
+                    var chatbox = document.getElementById('chatbox');
+                    if (chatbox.style.display === 'none') {
+                        chatbox.style.display = 'block';
+                        scrollToBottom(); // Chatbox açıldığında scroll'u aşağı kaydır
+                    } else {
+                        chatbox.style.display = 'none';
+                    }
+                }
+
+                // Function to scroll to the bottom of the chatbox messages
+                function scrollToBottom() {
+                    var chatboxMessages = document.getElementById('chatboxMessages');
+                    chatboxMessages.scrollTop = chatboxMessages.scrollHeight;
+                }
+
+                // Function to send a message
+                var messageHistory = [];
+
+                function sendMessage() {
+                    var userMessage = document.getElementById('userMessage').value;
+                    if (userMessage.trim() !== '') {
+                        // Kullanıcı mesajını arayüze ekleyelim
+                        var messageDiv = document.createElement('div');
+                        messageDiv.className = 'message user-message';
+                        messageDiv.textContent = userMessage;
+                        var chatboxMessages = document.getElementById('chatboxMessages');
+                        chatboxMessages.appendChild(messageDiv);
+                        document.getElementById('userMessage').value = '';
+
+                        // Mesaj geçmişine kullanıcı mesajını ekleyelim
+                        messageHistory.push({ role: 'user', content: userMessage });
+
+                        // Yükleme mesajını ekleyelim
+                        var loadingMessage = document.getElementById('loadingMessage');
+                        loadingMessage.style.display = 'block';
+                        chatboxMessages.appendChild(loadingMessage);
+                        scrollToBottom(); // Yükleme mesajı eklenince scroll'u aşağı kaydır
+
+                        // API'ye istek gönderelim
+                        fetch('/api/chat', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ text: userMessage, history: messageHistory })
+                        })
+                            .then(response => {
+                                if (!response.ok) {
+                                    return response.text().then(errorMessage => {
+                                        // Hata mesajını gösterecek bir fonksiyon çağır
+                                        displayErrorMessage(errorMessage);
+                                        throw new Error(errorMessage);
+                                    });
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                // Bot yanıtını alalım ve geçmişe ekleyelim
+                                var botMessage = data.choices[0].message.content.trim();
+                                messageHistory.push({ role: 'assistant', content: botMessage });
+
+                                // Bot mesajını arayüze ekleyelim
+                                var botMessageDiv = document.createElement('div');
+                                botMessageDiv.className = 'message bot-message';
+                                botMessageDiv.textContent = botMessage;
+                                chatboxMessages.appendChild(botMessageDiv);
+
+                                // Yükleme mesajını kaldır
+                                loadingMessage.style.display = 'none';
+
+                                // Scroll'u aşağı kaydır
+                                setTimeout(function () {
+                                    chatboxMessages.scrollTop = chatboxMessages.scrollHeight;
+                                }, 50);
+                            })
+                            .catch(error => console.error('Error:', error))
+                            .finally(() => {
+                                // Yükleme mesajını kaldır
+                                loadingMessage.style.display = 'none';
+                            });
+                    }
+                }
+
+                // Hata mesajını arayüzde göstermek için fonksiyon
+                function displayErrorMessage(message) {
+                    var chatboxMessages = document.getElementById('chatboxMessages');
+                    var errorMessageDiv = document.createElement('div');
+                    errorMessageDiv.className = 'message bot-message';
+                    errorMessageDiv.textContent = message;
+                    errorMessageDiv.style.backgroundColor = '#f8d7da'; // Hata mesajları için arka plan rengi
+                    chatboxMessages.appendChild(errorMessageDiv);
+
+                    // Scroll'u aşağı kaydır
+                    setTimeout(function () {
+                        chatboxMessages.scrollTop = chatboxMessages.scrollHeight;
+                    }, 50);
+                }
+
+                // Send message on button click
+                document.getElementById('sendMessage').onclick = function () {
+                    sendMessage();
+                };
+
+                // Send message on Enter key press
+                document.getElementById('userMessage').addEventListener('keydown', function (event) {
+                    if (event.key === 'Enter') {
+                        event.preventDefault(); // Enter tuşunun varsayılan işlevini durdurur
+                        sendMessage();
+                    }
+                });
+            });
+
+
+
+
+
+        </script>
+
+
+        <style>
+            #chatbox {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 320px;
+                height: 450px;
+                background-color: #f8f9fa;
+                border-radius: 20px;
+                box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+                z-index: 1000;
+            }
+
+            #chatboxHeader {
+                background-color: #FF1654;
+                color: white;
+                padding: 15px;
+                text-align: center;
+                font-weight: bold;
+                border-top-left-radius: 20px;
+                border-top-right-radius: 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+                #chatboxHeader #closeChatbox {
+                    background: none;
+                    border: none;
+                    color: white;
+                    font-size: 20px;
+                    cursor: pointer;
+                }
+
+            #chatboxMessages {
+                flex: 1;
+                padding: 15px;
+                overflow-y: scroll;
+                background-color: #ffffff;
+                border-top: 1px solid #ccc;
+                display: flex;
+                flex-direction: column;
+                height: 320px;
+                justify-content: flex-start;
+            }
+
+                #chatboxMessages::-webkit-scrollbar {
+                    width: 8px;
+                }
+
+                #chatboxMessages::-webkit-scrollbar-track {
+                    background: #f1f1f1;
+                }
+
+                #chatboxMessages::-webkit-scrollbar-thumb {
+                    background: #888;
+                    border-radius: 4px;
+                }
+
+                    #chatboxMessages::-webkit-scrollbar-thumb:hover {
+                        background: #555;
+                    }
+
+            .message {
+                margin-bottom: 10px;
+                padding: 10px;
+                border-radius: 10px;
+                max-width: 80%;
+                line-height: 1.4;
+                word-wrap: break-word;
+            }
+
+            #loadingMessage {
+                font-size: 18px;
+                color: #888;
+                text-align: center;
+                margin: 10px;
+            }
+
+
+            .message.bot-message {
+                background-color: #e9ecef;
+                align-self: flex-start;
+            }
+
+            .message.user-message {
+                background-color: #FF1654;
+                color: white;
+                align-self: flex-end;
+            }
+
+            #chatboxInput {
+                display: flex;
+                padding: 5px 10px;
+                background-color: #f8f9fa;
+                border-top: 1px solid #ccc;
+                position: sticky;
+                bottom: 0;
+                z-index: 1;
+            }
+
+            #userMessage {
+                flex: 1;
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 15px;
+                outline: none;
+                font-size: 14px;
+            }
+
+            #sendMessage {
+                background-color: #FF1654;
+                border: none;
+                padding: 10px;
+                margin-left: 8px;
+                border-radius: 50%;
+                color: white;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+                #sendMessage:hover {
+                    background-color: #FF1654;
+                }
+        </style>
+
+    </section>
+    <!-- //footer -->
+</footer>
