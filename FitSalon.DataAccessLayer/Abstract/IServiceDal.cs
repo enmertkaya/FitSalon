@@ -1,4 +1,4 @@
-﻿    using FitSalon.EntityLayer.Concrete;
+﻿using FitSalon.EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
