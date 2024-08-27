@@ -1,0 +1,19 @@
+extends LayoutTheme
+include ../mixins/travel-agency/common/TopNavbar
+include ../mixins/travel-agency/common/Navbar
+
+append variables
+  //- - var attrsBody = {  };
+  //- - var breakPoint = 'lg';
+  - var attrsFooter = { class: 'position-relative'}
+
+block mainContent
+  +TopNavbar
+  +Navbar
+  block flightContent
+
+
+  block supportChat
+    +SupportChat
+
+  +Footer

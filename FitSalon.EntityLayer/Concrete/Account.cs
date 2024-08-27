@@ -12,6 +12,6 @@ namespace FitSalon.EntityLayer.Concrete
         public string Name { get; set; }
         public decimal Balance { get; set; }
        public Employee Employee { get; set; }
-       public int GuideID { get; set; }   
+       public int EmployeeID { get; set; }   
     }
 }

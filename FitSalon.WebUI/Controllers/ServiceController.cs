@@ -22,9 +22,9 @@ namespace FitSalon.WebUI.Controllers
         [HttpGet]
         public async Task<IActionResult> ServiceDetails(int id)
         {
-       
-
-            return View();
+            ViewBag.i = id;
+            var values = serviceManager.TGetByID(id);
+            return View(values);
         }
         [HttpPost]
         public IActionResult ServiceDetails(Service p)

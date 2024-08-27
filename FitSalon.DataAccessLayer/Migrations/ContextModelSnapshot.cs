@@ -101,9 +101,6 @@ namespace FitSalon.DataAccessLayer.Migrations
                     b.Property<int>("EmployeeID")
                         .HasColumnType("int");
 
-                    b.Property<int>("GuideID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -277,9 +274,6 @@ namespace FitSalon.DataAccessLayer.Migrations
                     b.Property<string>("CommentUser")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DestinationID")
-                        .HasColumnType("int");
 
                     b.Property<int>("ServiceID")
                         .HasColumnType("int");
