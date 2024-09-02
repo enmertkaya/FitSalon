@@ -70,6 +70,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Shared\Components\_EmployeeList\Default.cshtml" />
+    <None Include="Views\Shared\Components\_LastServices\Default.cshtml" />
+    <None Include="Views\Shared\Components\_PlatformSetting\Default.cshtml" />
+    <None Include="Views\Shared\Components\_ProfileInformation\Default.cshtml" />
     <None Include="wwwroot\.editorconfig" />
     <None Include="wwwroot\AdminTemplate\gulp\build.gulp.js" />
     <None Include="wwwroot\AdminTemplate\gulp\clean.gulp.js" />
@@ -1092,6 +1096,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Member\Data\" />
+    <Folder Include="wwwroot\userimages\" />
   </ItemGroup>
 
 </Project>

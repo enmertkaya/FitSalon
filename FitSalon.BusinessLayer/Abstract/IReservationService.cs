@@ -13,6 +13,7 @@ namespace FitSalon.BusinessLayer.Abstract
         List<Reservation> GetListWithReservationByWaitApproval(int id);
         List<Reservation> GetListWithReservationByRejected(int id);
         List<Reservation> GetListWithReservationByApproved(int id);
+        List<Reservation> GetListWithReservationByPrevious(int id);
 
         List<Reservation> GetAllReservation();
         void ApproveReservation(int id);

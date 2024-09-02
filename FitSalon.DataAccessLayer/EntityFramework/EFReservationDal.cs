@@ -28,6 +28,13 @@ namespace FitSalon.DataAccessLayer.EntityFramework
                 return context.Reservations.Include(x => x.Service).Where(x => x.Status == "Onaylanmadı" && x.AppUserID == id).ToList();
             }
         }
+        public List<Reservation> GetListWithReservationByPrevious(int id)
+        {
+            using (var context = new Context())
+            {
+                return context.Reservations.Include(x => x.Service).Where(x => x.Status == "Geçmiş Rezervasyon" && x.AppUserID == id).ToList();
+            }
+        }
 
         public List<Reservation> GetListWithReservationByWaitApproval(int id)
         {

@@ -1,5 +1,6 @@
 ﻿using FitSalon.DataAccessLayer.Abstract;
 using FitSalon.DataAccessLayer.Concrete;
+using FitSalon.DataAccessLayer.Migrations;
 using FitSalon.DataAccessLayer.Repository;
 using FitSalon.EntityLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,14 @@ namespace FitSalon.DataAccessLayer.EntityFramework
             using (var c = new Context())
             {
                 return c.Services.Where(x => x.ServiceID == id).Include(x => x.Employee).FirstOrDefault();
+            }
+        }
+        public List<Service> GetLast4Services()
+        {
+            using (var context = new Context())
+            {
+                var values = context.Services.Take(4).OrderByDescending(x => x.ServiceID).ToList();
+                return values;
             }
         }
     }

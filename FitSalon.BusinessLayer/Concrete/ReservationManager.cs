@@ -22,6 +22,10 @@ namespace FitSalon.BusinessLayer.Concrete
         {
             _reservationDal.ApproveReservation(id);
         }
+        public List<Reservation> GetListWithReservationByPrevious(int id)
+        {
+            return _reservationDal.GetListWithReservationByPrevious(id);
+        }
 
         public List<Reservation> GetAllReservation()
         {

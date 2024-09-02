@@ -1,4 +1,5 @@
-﻿using FitSalon.EntityLayer.Concrete;
+﻿using FitSalon.DataAccessLayer.Migrations;
+using FitSalon.EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,7 @@ namespace FitSalon.BusinessLayer.Abstract
 	{
 
         public Service TGetServiceWithEmployee(int id);
+        public List<Service> TGetLast4Services();
+
     }
 }

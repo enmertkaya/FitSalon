@@ -1,6 +1,7 @@
 ﻿using FitSalon.BusinessLayer.Abstract;
 using FitSalon.DataAccessLayer.Abstract;
 using FitSalon.DataAccessLayer.EntityFramework;
+using FitSalon.DataAccessLayer.Migrations;
 using FitSalon.EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,10 @@ namespace FitSalon.BusinessLayer.Concrete
         public Service TGetServiceWithEmployee(int id)
         {
             return _serviceDal.GetServiceWithEmployee(id);
+        }
+        public List<Service> TGetLast4Services()
+        {
+            return _serviceDal.GetLast4Services();
         }
 
         public List<Service> TGetList()
