@@ -78,7 +78,7 @@ namespace FitSalon.WebUI.Controllers
 
                 if(result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Service");
+                    return RedirectToAction("Index", "Profile", new {area="Member"});
                 }
                 else
                 {
