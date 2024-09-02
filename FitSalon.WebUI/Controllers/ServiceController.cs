@@ -10,8 +10,10 @@ using Microsoft.AspNet.Identity;
 
 namespace FitSalon.WebUI.Controllers
 {
+    [AllowAnonymous]
     public class ServiceController : Controller
     {
+
         ServiceManager serviceManager = new ServiceManager(new EFServiceDal());
 
         public IActionResult Index()

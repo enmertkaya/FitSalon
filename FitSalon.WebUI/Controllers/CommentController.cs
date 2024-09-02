@@ -2,11 +2,13 @@
 using FitSalon.BusinessLayer.Concrete;
 using FitSalon.DataAccessLayer.EntityFramework;
 using FitSalon.EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitSalon.WebUI.Controllers
 {
+    [AllowAnonymous]
     public class CommentController : Controller
     {
         CommentManager commentManager = new CommentManager(new EFCommentDal());
