@@ -63,7 +63,8 @@ namespace FitSalon.WebUI.Areas.Member.Controllers
             p.AppUserID = Convert.ToInt32(user);
             p.Status = "Onay Bekliyor";
             reservationManager.TInsert(p);
-            return RedirectToAction("MyCurrentReservation");
+            var url = "/Member/Reservation/MyApprovalReservation/";
+            return Redirect(url);
         }
     }
 }
