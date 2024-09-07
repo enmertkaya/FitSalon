@@ -13,19 +13,25 @@ namespace FitSalon.WebUI.Areas.Admin.Controllers
     [Area("Admin")]
     public class ServiceController : Controller
     {
-        ServiceManager serviceManager = new ServiceManager(new EFServiceDal());
-        EmployeeManager employeeManager = new EmployeeManager(new EFEmployeeDal());
+        private readonly IServiceService _serviceService;
+        private readonly IEmployeeService _employeeService;
+
+        public ServiceController(IServiceService serviceService, IEmployeeService employeeService)
+        {
+            _serviceService = serviceService;
+            _employeeService = employeeService;
+        }
 
         public IActionResult Index()
         {
-            var values = serviceManager.TGetList();
+            var values = _serviceService.TGetList();
             return View(values);
         }
 
         [HttpGet]
         public IActionResult AddService()
         {
-            List<SelectListItem> values = (from x in employeeManager.TGetList()
+            List<SelectListItem> values = (from x in _employeeService.TGetList()
                                            select new SelectListItem
                                            {
                                                Text = x.EmployeeName,
@@ -36,34 +42,34 @@ namespace FitSalon.WebUI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddService(Service service)
+        public IActionResult AddService(Service p)
         {
-            serviceManager.TInsert(service);
+            _serviceService.TInsert(p);
             return RedirectToAction("Index");
         }
         public IActionResult DeleteService(int id)
         {
-            var values = serviceManager.TGetByID(id);
-            serviceManager.TDelete(values);
+            var values = _serviceService.TGetByID(id);
+            _serviceService.TDelete(values);
             return RedirectToAction("Index");
         }
         [HttpGet]
         public IActionResult UpdateService(int id)
         {
-            List<SelectListItem> values1 = (from x in employeeManager.TGetList()
+            List<SelectListItem> values1 = (from x in _employeeService.TGetList()
                                             select new SelectListItem
                                             {
                                                 Text = x.EmployeeName,
                                                 Value = x.EmployeeID.ToString()
                                             }).ToList();
             ViewBag.SLG = values1;
-            var values = serviceManager.TGetByID(id);
+            var values = _serviceService.TGetByID(id);
             return View(values);
         }
         [HttpPost]
         public IActionResult UpdateService(Service service)
         {
-            serviceManager.TUpdate(service);
+            _serviceService.TUpdate(service);
             return RedirectToAction("Index");
         }
     }

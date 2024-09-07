@@ -10,7 +10,7 @@ namespace FitSalon.WebUI.ViewComponents.Comment
         CommentManager commentManager = new CommentManager (new EFCommentDal());
         public IViewComponentResult Invoke(int id)
         {
-            var values = commentManager.TGetServiceByID(id);
+            var values = commentManager.TGetListCommentWithServiceAndUser(id);
             return View(values);
         }
     }

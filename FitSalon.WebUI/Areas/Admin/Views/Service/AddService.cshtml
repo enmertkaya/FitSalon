@@ -7,8 +7,13 @@
 <h1>Yeni Rota Oluşturma</h1>
 <form method="post">
     <div class="form-group">
-        @Html.Label("Firma Adı: ")
+        @Html.Label("Firma Şehri: ")
         <input type ="text" asp-for="City" class="form-control" required/>
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.Label("Firma Adı: ")
+        <input type="text" asp-for="CompanyName" class="form-control" required />
     </div>
     <br />
     <div class="form-group">

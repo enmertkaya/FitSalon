@@ -13,6 +13,11 @@
     </div>
     <br />
     <div class="form-group">
+        @Html.Label("Firma Adı: ")
+        <input type="text" asp-for="CompanyName" class="form-control" required />
+    </div>
+    <br />
+    <div class="form-group">
         @Html.Label("Gün/Gece Bilgisi: ")
         <input type="text" asp-for="DayNight" class="form-control" required />
     </div>

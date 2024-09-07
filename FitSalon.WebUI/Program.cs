@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using System.Reflection;
+using FitSalon.BusinessLayer.Container;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,10 @@ builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Contex
 builder.Services.AddDbContext<Context>();
 builder.Services.AddHttpClient();
 builder.Services.AddControllersWithViews();
+
+Extensions.ContainerDependencies(builder.Services);
+Extensions.CustomValidator(builder.Services);
+
 
 
 builder.Services.AddMvc(config =>
@@ -52,6 +57,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAuthentication();
+app.UseStatusCodePagesWithReExecute("/Error/Error404", "?code={0}");
 
 app.UseRouting();
 

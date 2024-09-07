@@ -511,7 +511,6 @@ namespace FitSalon.DataAccessLayer.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ServiceID"), 1L, 1);
 
                     b.Property<string>("Capacity")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("City")
