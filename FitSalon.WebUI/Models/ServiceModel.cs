@@ -1,0 +1,10 @@
+﻿namespace FitSalon.WebUI.Models
+{
+    public class ServiceModel
+    {
+        public string City { get; set; }    
+        public string DayNight { get; set; }    
+        public double Price { get; set; }    
+        public string Capacity { get; set; }    
+    }
+}

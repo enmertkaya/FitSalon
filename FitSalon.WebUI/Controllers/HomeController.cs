@@ -1,9 +1,12 @@
 ﻿using FitSalon.WebUI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace FitSalon.WebUI.Controllers
 {
+    [AllowAnonymous]
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -15,6 +18,7 @@ namespace FitSalon.WebUI.Controllers
 
         public IActionResult Index()
         {
+            _logger.LogInformation("Index sayfası çağrıldı");
             return View();
         }
 

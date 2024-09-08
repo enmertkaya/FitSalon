@@ -24,6 +24,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Add services to the container.
+builder.Services.AddLogging(x =>
+{
+    x.ClearProviders();
+    x.AddFile($"{Directory.GetCurrentDirectory()}\\LogFile\\log.txt", LogLevel.Error);
+
+});
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddTokenProvider<DataProtectorTokenProvider<AppUser>>(TokenOptions.DefaultProvider).AddEntityFrameworkStores<Context>();
 builder.Services.AddDbContext<Context>();
