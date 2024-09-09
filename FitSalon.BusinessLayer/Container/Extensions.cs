@@ -68,6 +68,9 @@ namespace FitSalon.BusinessLayer.Container
             services.AddScoped<IAbout1Service, About1Manager>();
             services.AddScoped<IAbout1Dal, EFAbout1Dal>();
 
+            services.AddScoped<IExcelService, ExcelManager>();
+            services.AddScoped<IPdfService, PdfManager>();
+
             services.AddScoped<IUOWDal, UOWDal>();
         }
 

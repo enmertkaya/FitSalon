@@ -47,11 +47,59 @@ builder.Services.AddMvc(config =>
     var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
     config.Filters.Add(new AuthorizeFilter(policy));
 });
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequiredLength = 8;
+    options.Password.RequireUppercase = true; // En az bir büyük harf zorunluluðu
+    options.Password.RequireLowercase = true; // En az bir küçük harf zorunluluðu
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredUniqueChars = 3;
+});
 // Register your service here
 builder.Services.AddMvc();
 
+builder.Services.PostConfigure<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme, options =>
+{
+    options.LoginPath = "/Login/SignIn";
+    options.LogoutPath = "/Login/Logout";
+    options.AccessDeniedPath = "/Error/Error404";
+});
 
 var app = builder.Build();
+
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path.Equals("/Member", StringComparison.OrdinalIgnoreCase))
+    {
+        context.Response.Redirect("/Member/Dashboard");
+    }
+    else if (context.Request.Path.Equals("/Member/", StringComparison.OrdinalIgnoreCase))
+    {
+        context.Response.Redirect("/Member/Dashboard");
+    }
+    else
+    {
+        await next();
+    }
+});
+
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path.Equals("/Admin", StringComparison.OrdinalIgnoreCase))
+    {
+        context.Response.Redirect("/Admin/Dashboard");
+    }
+    else if (context.Request.Path.Equals("/Admin/", StringComparison.OrdinalIgnoreCase))
+    {
+        context.Response.Redirect("/Admin/Dashboard");
+    }
+    else
+    {
+        await next();
+    }
+});
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

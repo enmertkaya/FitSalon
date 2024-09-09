@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 using FitSalon.WebUI.Models;
+using FitSalon.BusinessLayer.Abstract;
 
 namespace FitSalon.WebUI.Areas.Admin.Controllers
 {
@@ -12,6 +13,13 @@ namespace FitSalon.WebUI.Areas.Admin.Controllers
 
     public class ExcelController : Controller
     {
+        private readonly IExcelService _excelService;
+
+        public ExcelController(IExcelService excelService)
+        {
+            _excelService = excelService;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -35,22 +43,7 @@ namespace FitSalon.WebUI.Areas.Admin.Controllers
 
         public IActionResult StaticExcelReport()
         {
-            ExcelPackage excel = new ExcelPackage();
-            var worksheet = excel.Workbook.Worksheets.Add("Sayfa1");
-            worksheet.Cells[1, 1].Value = "İşletmeler";
-            worksheet.Cells[1, 2].Value = "Çalışanlar";
-            worksheet.Cells[1, 3].Value = "Kontenjan";
-
-            worksheet.Cells[2, 1].Value = "Fitshape + Diyet";
-            worksheet.Cells[2, 2].Value = "Enes Mert Kaya";
-            worksheet.Cells[2, 2].Value = "50";
-
-            worksheet.Cells[3, 1].Value = "EMS Seansları";
-            worksheet.Cells[3, 2].Value = "Burçin Yücel";
-            worksheet.Cells[3, 2].Value = "35";
-
-            var bytes = excel.GetAsByteArray();
-            return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Statik.xlsx");
+            return File(_excelService.ExcelList(ServiceList()), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "YeniExcel.xlsx");
         }
 
         public IActionResult ServiceExcelReport()

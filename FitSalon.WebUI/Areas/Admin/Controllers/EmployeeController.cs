@@ -39,7 +39,7 @@ namespace FitSalon.WebUI.Areas.Admin.Controllers
             if(validationResult.IsValid)
             {
                 _employeeService.TInsert(employee);
-                return RedirectToAction("Index");
+                return Redirect("/Admin/Employee/Index");
             }
             else
             {
@@ -60,23 +60,24 @@ namespace FitSalon.WebUI.Areas.Admin.Controllers
         public IActionResult EditEmployee(Employee employee)
         {
             _employeeService.TUpdate(employee);
-            return RedirectToAction("Index");
+            return Redirect("/Admin/Employee/Index");
+
         }
         public IActionResult ChangeToTrue(int id)
         {
             _employeeService.TChangeToTrueByEmployee(id);
-            return RedirectToAction("Index");
+            return Redirect("/Admin/Employee/Index");
         }
         public IActionResult ChangeToFalse(int id)
         {
             _employeeService.TChangeToFalseByEmployee(id);
-            return RedirectToAction("Index");
+            return Redirect("/Admin/Employee/Index");
         }
         public IActionResult DeleteEmployee(int id)
         {
             var values = _employeeService.TGetByID(id);
             _employeeService.TDelete(values);
-            return RedirectToAction("Index");
+            return Redirect("/Admin/Employee/Index");
         }
 
     }
