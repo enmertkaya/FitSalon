@@ -65,10 +65,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Admin\Views\City\Index.cshtml" />
+    <None Include="Areas\Admin\Views\ContactUs\Index.cshtml" />
     <None Include="Areas\Admin\Views\Excel\Index.cshtml" />
     <None Include="Areas\Admin\Views\Employee\AddEmployee.cshtml" />
     <None Include="Areas\Admin\Views\Employee\EditEmployee.cshtml" />
     <None Include="Areas\Admin\Views\Employee\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Mail\Index.cshtml" />
     <None Include="Areas\Admin\Views\PDFReport\Index.cshtml" />
     <None Include="Areas\Admin\Views\User\Index.cshtml" />
     <None Include="Areas\Admin\Views\User\ReservationUser.cshtml" />

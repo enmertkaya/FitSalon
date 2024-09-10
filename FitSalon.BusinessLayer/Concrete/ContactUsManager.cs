@@ -18,14 +18,24 @@ namespace FitSalon.BusinessLayer.Concrete
             _contactUsDal = contactUsDal;
         }
 
+        public void TInsert(ContactUs t)
+        {
+            _contactUsDal.Insert(t);
+        }
+
+        public void TContactUsStatusChangeToFalse(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void TDelete(ContactUs t)
         {
-            _contactUsDal.Delete(t);
+            throw new NotImplementedException();
         }
 
         public ContactUs TGetByID(int id)
         {
-            return _contactUsDal.GetByID(id);
+            throw new NotImplementedException();
         }
 
         public List<ContactUs> TGetList()
@@ -33,9 +43,14 @@ namespace FitSalon.BusinessLayer.Concrete
             return _contactUsDal.GetList();
         }
 
-        public void TInsert(ContactUs t)
+        public List<ContactUs> TGetListContactUsByFalse()
         {
-            _contactUsDal.Insert(t);
+            return _contactUsDal.GetListContactUsByFalse();
+        }
+
+        public List<ContactUs> TGetListContactUsByTrue()
+        {
+            return _contactUsDal.GetListContactUsByTrue();
         }
 
         public void TUpdate(ContactUs t)
