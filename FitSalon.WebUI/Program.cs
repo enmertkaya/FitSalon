@@ -19,6 +19,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using System.Reflection;
 using FitSalon.BusinessLayer.Container;
+using Microsoft.AspNetCore.Hosting;
+using FitSalon.WebUI.Mapping.AutoMapperProfile;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +38,11 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddTokenProvider<DataProtectorTokenProvider<AppUser>>(TokenOptions.DefaultProvider).AddEntityFrameworkStores<Context>();
 builder.Services.AddDbContext<Context>();
 builder.Services.AddHttpClient();
+
+Extensions.ContainerDependencies(builder.Services);
+
+builder.Services.AddAutoMapper(typeof(MapProfile).Assembly);
+
 builder.Services.AddControllersWithViews();
 
 Extensions.ContainerDependencies(builder.Services);
