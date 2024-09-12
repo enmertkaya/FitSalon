@@ -65,11 +65,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Admin\Views\Account\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Account\SendUOW.cshtml" />
     <None Include="Areas\Admin\Views\Announcement\AddAnnouncement.cshtml" />
     <None Include="Areas\Admin\Views\Announcement\Index.cshtml" />
     <None Include="Areas\Admin\Views\Announcement\UpdateAnnouncement.cshtml" />
     <None Include="Areas\Admin\Views\City\Index.cshtml" />
     <None Include="Areas\Admin\Views\ContactUs\Index.cshtml" />
+    <None Include="Areas\Admin\Views\EmployeeMediatR\AddEmployee.cshtml" />
+    <None Include="Areas\Admin\Views\EmployeeMediatR\GetEmployee.cshtml" />
+    <None Include="Areas\Admin\Views\EmployeeMediatR\Index.cshtml" />
+    <None Include="Areas\Admin\Views\ServiceCQRS\AddService.cshtml" />
+    <None Include="Areas\Admin\Views\ServiceCQRS\GetService.cshtml" />
+    <None Include="Areas\Admin\Views\ServiceCQRS\Index.cshtml" />
     <None Include="Areas\Admin\Views\Excel\Index.cshtml" />
     <None Include="Areas\Admin\Views\Employee\AddEmployee.cshtml" />
     <None Include="Areas\Admin\Views\Employee\EditEmployee.cshtml" />

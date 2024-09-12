@@ -1,0 +1,21 @@
+﻿@model FitSalon.WebUI.CQRS.Results.EmployeeResults.GetEmployeeByIDQueryResult
+@{
+    ViewData["Title"] = "GetEmployees";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>MediatR CQRS Rehber Bilgisi Düzenleme</h1>
+<form method="post">
+    <input type="hidden" asp-for="EmployeeID" />
+    <label>Ad Soyad: </label>
+    <input type="text" asp-for="EmployeeName" class="form-control" />
+    <br />
+    <label>Açıklama: </label>
+    <input type="text" asp-for="Description" class="form-control" />
+    <br />
+    <label>Görsel Yolu: </label>
+    <input type="text" asp-for="Image" class="form-control" />
+    <br />
+    <button class="btn btn-outline-primary">MediatR CQRS Üzerinden Rehber Bilgisini Güncelle</button>
+</form>
+

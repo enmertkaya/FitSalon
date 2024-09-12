@@ -1,0 +1,33 @@
+﻿@model List<FitSalon.DtoLayer.DTOs.ApiNutritionDTOs.ApiNutritionDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Api Nutrition List</h1>
+<br />
+<table class="table table-striped">
+    <tr>
+        <th>#</th>
+        <th>İsim</th>
+        <th>Kalori</th>
+        <th>Tür</th>
+        <th>Yağ</th>
+        <th>Karbon</th>
+        <th>Protein</th>
+        <th>Kategori</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.id</td>
+            <td>@item.name</td>
+            <td>@item.caloric</td>
+            <td>@item.type</td>
+            <td>@item.fat</td>
+            <td>@item.carbon</td>
+            <td>@item.category_id</td>
+        </tr>
+    }
+</table>
+

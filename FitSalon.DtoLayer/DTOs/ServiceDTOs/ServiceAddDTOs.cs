@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FitSalon.DtoLayer.DTOs.DestinationDTOs
+namespace FitSalon.DtoLayer.DTOs.ServiceDTOs
 {
-    public class DestinationAddDTOs
+    public class ServiceAddDTOs
     {
         public string City { get; set; }
         public string DayNight { get; set; }

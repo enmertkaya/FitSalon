@@ -1,0 +1,23 @@
+﻿@model FitSalon.WebUI.CQRS.Commands.ServiceCommands.CreateServiceCommand
+@{
+    ViewData["Title"] = "AddService";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>CQRS ile Firma Ekleme</h1>
+
+<form method="post">
+    <label>Şehir Adı: </label>
+    <input type="text" asp-for="City" class="form-control" />
+    <br />
+    <label>Gün-Gece Sayısı: </label>
+    <input type="text" asp-for="DayNight" class="form-control" />
+    <br />
+    <label>Kapasite: </label>
+    <input type="text" asp-for="Capacity" class="form-control" />
+    <br />
+    <label>Fiyat: </label>
+    <input type="text" asp-for="Price" class="form-control" />
+    <br />
+    <button class="btn btn-outline-primary">CQRS ile Firma Oluştur</button>
+</form>

@@ -21,6 +21,7 @@ using System.Reflection;
 using FitSalon.BusinessLayer.Container;
 using Microsoft.AspNetCore.Hosting;
 using FitSalon.WebUI.Mapping.AutoMapperProfile;
+using FitSalon.WebUI.CQRS.Handlers.ServiceHandlers;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,10 +35,25 @@ builder.Services.AddLogging(x =>
 
 });
 
+builder.Services.AddSession(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddTokenProvider<DataProtectorTokenProvider<AppUser>>(TokenOptions.DefaultProvider).AddEntityFrameworkStores<Context>();
 builder.Services.AddDbContext<Context>();
 builder.Services.AddHttpClient();
+
+builder.Services.AddScoped<GetAllServiceQueryHandler>();
+builder.Services.AddScoped<GetServiceByIDQueryHandler>();
+builder.Services.AddScoped<CreateServiceCommandHandler>();
+builder.Services.AddScoped<DeleteServiceCommandHandler>();
+builder.Services.AddScoped<UpdateServiceCommandHandler>();
+
+builder.Services.AddMediatR(typeof(Program)); //MediatR'ý kullanabilme parametresi.
+
 
 Extensions.ContainerDependencies(builder.Services);
 
@@ -109,6 +125,16 @@ app.Use(async (context, next) =>
     }
 });
 
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
+
+
+app.UseSession();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
