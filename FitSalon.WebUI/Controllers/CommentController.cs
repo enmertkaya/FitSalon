@@ -8,10 +8,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FitSalon.WebUI.Controllers
 {
-    [AllowAnonymous]
     public class CommentController : Controller
     {
-        CommentManager commentManager = new CommentManager(new EFCommentDal());
+        private readonly ICommentService _commentService;
+
+
+        public CommentController(ICommentService commentService)
+        {
+            _commentService = commentService;
+        }
 
         [HttpGet]
         public PartialViewResult AddComment()
@@ -23,7 +28,7 @@ namespace FitSalon.WebUI.Controllers
         {
             p.CommentDate = Convert.ToDateTime(DateTime.Now.ToShortDateString());
             p.CommentStatus = true;
-            commentManager.TInsert(p);
+            _commentService.TInsert(p);
             return RedirectToAction("ServiceDetails", "Service", new { id = p.ServiceID });
         }
 

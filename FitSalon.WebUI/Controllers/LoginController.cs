@@ -1,5 +1,4 @@
 ﻿using FitSalon.EntityLayer.Concrete;
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using FitSalon.DtoLayer.DTOs.AppUserDTOs;
@@ -16,10 +15,10 @@ namespace FitSalon.WebUI.Controllers
     public class LoginController : Controller
     {
 
-        private readonly Microsoft.AspNetCore.Identity.UserManager<AppUser> _userManager;
+        private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager <AppUser> _signInManager;
 
-        public LoginController(Microsoft.AspNetCore.Identity.UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public LoginController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

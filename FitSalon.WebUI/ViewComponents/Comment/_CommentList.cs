@@ -7,10 +7,16 @@ namespace FitSalon.WebUI.ViewComponents.Comment
 {
     public class _CommentList : ViewComponent
     {
-        CommentManager commentManager = new CommentManager (new EFCommentDal());
+        private readonly ICommentService _commentService;
+
+        public _CommentList(ICommentService commentService)
+        {
+            _commentService = commentService;
+        }
+
         public IViewComponentResult Invoke(int id)
         {
-            var values = commentManager.TGetListCommentWithServiceAndUser(id);
+            var values = _commentService.TGetListCommentWithServiceAndUser(id);
             return View(values);
         }
     }
