@@ -97,12 +97,15 @@
     <None Include="Views\Error\Error404.cshtml" />
     <None Include="Views\Employees\Index.cshtml" />
     <None Include="Views\Employee\Index.cshtml" />
+    <None Include="Views\Packets\Index.cshtml" />
     <None Include="Views\Shared\Components\_AdminDashboardHeader\Default.cshtml" />
     <None Include="Views\Shared\Components\_AdminEmployeeList\Default.cshtml" />
+    <None Include="Views\Shared\Components\_AnnouncementList\Default.cshtml" />
     <None Include="Views\Shared\Components\_Cards1Statistic\Default.cshtml" />
     <None Include="Views\Shared\Components\_Cards2Statistics\Default.cshtml" />
     <None Include="Views\Shared\Components\_ContactInfo\Default.cshtml" />
     <None Include="Views\Shared\Components\_DashboardBanner\Default.cshtml" />
+    <None Include="Views\Shared\Components\_ServiceList\Default.cshtml" />
     <None Include="Views\Shared\Components\_ServiceStatistic2\Default.cshtml" />
     <None Include="Views\Shared\Components\_ServiceStatistic\Default.cshtml" />
     <None Include="Views\Shared\Components\_EmployeeList\Default.cshtml" />

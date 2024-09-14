@@ -23,7 +23,7 @@
     </section>
     <!-- //about breadcrumb -->
     <!--/blog-->
-    @* <div class="py-5 w3l-homeblock1 text-center">
+    <div class="py-5 w3l-homeblock1 text-center">
         <div class="container mt-md-3">
             <h3 class="blog-desc-big text-center mb-4">
                 @Model.City İşletmeler Hakkında Bilmeniz Gereken Her Şey!
@@ -40,7 +40,7 @@
                 </div>
             </div>
         </div>
-    </div> *@
+    </div>
     <section class="blog-post-main w3l-homeblock1">
         <!--/blog-post-->
         <div class="blog-content-inf pb-5">
@@ -94,7 +94,7 @@
                         </div>
                     </div>
                     <!--//author-card-->
-                    @* <div class="author-card mt-5">
+                    <div class="author-card mt-5">
                         <div class="row align-items-center">
                             <div class="col-sm-3 col-6">
                                 <div>
@@ -128,7 +128,7 @@
                                 </ul>
                             </div>
                         </div>
-                    </div> *@
+                    </div>
                     <!--//author-card-->
                     @await Component.InvokeAsync("_CommentList", new { id = ViewBag.i })
 

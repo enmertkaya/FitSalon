@@ -1,23 +1,24 @@
 ﻿using FitSalon.BusinessLayer.Abstract;
+using FitSalon.EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace TraversalPresentationLayer.Controllers
+namespace FitSalon.WebUI.Controllers
 {
     [AllowAnonymous]
-    public class ServicesController : Controller
+    public class PacketsController : Controller
     {
         private readonly IServiceService _serviceService;
 
-        public ServicesController(IServiceService serviceService)
+        public PacketsController(IServiceService serviceService)
         {
             _serviceService = serviceService;
         }
-
+        List<Service> packet = new List<Service>();
         public IActionResult Index()
         {
-            var values = _serviceService.TGetList();
-            return View(values);
+            packet = _serviceService.TGetList();
+            return View(packet);
         }
     }
 }

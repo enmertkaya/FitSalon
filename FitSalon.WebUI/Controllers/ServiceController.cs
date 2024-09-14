@@ -14,18 +14,36 @@ namespace FitSalon.WebUI.Controllers
     public class ServiceController : Controller
     {
 
-        ServiceManager serviceManager = new ServiceManager(new EFServiceDal());
+        private readonly IServiceService _serviceService;
+        private readonly Microsoft.AspNetCore.Identity.UserManager<AppUser> _userManager;
+
+        public ServiceController(IServiceService serviceService, Microsoft.AspNetCore.Identity.UserManager<AppUser> userManager)
+        {
+            _serviceService = serviceService;
+            _userManager = userManager;
+        }
 
         public IActionResult Index()
         {
-            var values = serviceManager.TGetList();
+            ViewBag.v12 = "12";
+            var values = _serviceService.TGetList();
             return View(values);
         }
+
         [HttpGet]
         public async Task<IActionResult> ServiceDetails(int id)
         {
             ViewBag.i = id;
-            var values = serviceManager.TGetByID(id);
+            ViewBag.servID = id;
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = await _userManager.FindByNameAsync(User.Identity.Name);
+                ViewBag.userID = user.Id;
+            }
+
+
+            var values = _serviceService.TGetServiceWithEmployee(id);
+
             return View(values);
         }
         [HttpPost]

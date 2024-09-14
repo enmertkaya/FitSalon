@@ -1,14 +1,14 @@
 ﻿@using FitSalon.EntityLayer.Concrete
 @model List<Comment>
 <div class="comments mt-5">
-    <h4 class="side-title ">Yorumlar</h4>
+    <h4 class="side-title ">Yorumlar (@ViewBag.commentCount)</h4>
     @foreach(var item in Model)
     {
         <div class="media mt-4">
             @if (item.AppUser.ImageURL != null)
             {
                 <div class="img-circle">
-                    <img src="/UserImages/@item.AppUser.ImageURL" class="img-fluid" alt="...">
+                    <img src="@item.AppUser.ImageURL" class="img-fluid" alt="...">
                 </div>
             }
             <div class="media-body">
