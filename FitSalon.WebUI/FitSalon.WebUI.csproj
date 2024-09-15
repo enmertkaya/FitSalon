@@ -75,6 +75,11 @@
     <None Include="Areas\Admin\Views\EmployeeMediatR\AddEmployee.cshtml" />
     <None Include="Areas\Admin\Views\EmployeeMediatR\GetEmployee.cshtml" />
     <None Include="Areas\Admin\Views\EmployeeMediatR\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Role\AddRole.cshtml" />
+    <None Include="Areas\Admin\Views\Role\AssignRole.cshtml" />
+    <None Include="Areas\Admin\Views\Role\EditRole.cshtml" />
+    <None Include="Areas\Admin\Views\Role\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Role\UserList.cshtml" />
     <None Include="Areas\Admin\Views\ServiceCQRS\AddService.cshtml" />
     <None Include="Areas\Admin\Views\ServiceCQRS\GetService.cshtml" />
     <None Include="Areas\Admin\Views\ServiceCQRS\Index.cshtml" />

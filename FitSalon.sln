@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitSalon.BusinessLayer", "F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitSalon.WebUI", "FitSalon.WebUI\FitSalon.WebUI.csproj", "{F6CC49FB-21F5-4F8A-88A3-E72933A6D7F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRApi", "SignalRApi\SignalRApi.csproj", "{28F481B8-2106-402D-980D-581624834D83}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{F6CC49FB-21F5-4F8A-88A3-E72933A6D7F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6CC49FB-21F5-4F8A-88A3-E72933A6D7F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6CC49FB-21F5-4F8A-88A3-E72933A6D7F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28F481B8-2106-402D-980D-581624834D83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28F481B8-2106-402D-980D-581624834D83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28F481B8-2106-402D-980D-581624834D83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28F481B8-2106-402D-980D-581624834D83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
