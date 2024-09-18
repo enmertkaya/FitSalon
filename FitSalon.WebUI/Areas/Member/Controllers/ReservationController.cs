@@ -12,7 +12,7 @@ namespace FitSalon.WebUI.Areas.Member.Controllers
     public class ReservationController : Controller
     {
         ServiceManager serviceManager = new ServiceManager(new EFServiceDal());
-        ReservationManager reservationManager = new ReservationManager (new EFReservationDal());
+        ReservationManager reservationManager = new ReservationManager(new EFReservationDal());
 
         private readonly UserManager<AppUser> _userManager;
         public ReservationController(UserManager<AppUser> userManager)
@@ -57,10 +57,10 @@ namespace FitSalon.WebUI.Areas.Member.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult NewReservation(Reservation p)
+        public async Task<IActionResult> NewReservation(Reservation p)
         {
-            var user = _userManager.GetUserId(User);
-            p.AppUserID = Convert.ToInt32(user);
+            var userId = await _userManager.GetUserAsync(User);
+            p.AppUserID = userId.Id;
             p.Status = "Onay Bekliyor";
             reservationManager.TInsert(p);
             var url = "/Member/Reservation/MyApprovalReservation/";

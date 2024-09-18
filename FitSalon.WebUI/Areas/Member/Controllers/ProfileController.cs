@@ -1,4 +1,5 @@
-﻿using FitSalon.EntityLayer.Concrete;
+﻿using FitSalon.DtoLayer.DTOs.MemberDTOs;
+using FitSalon.EntityLayer.Concrete;
 using FitSalon.WebUI.Areas.Member.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -20,32 +21,32 @@ namespace FitSalon.WebUI.Areas.Member.Controllers
         public async Task<IActionResult> Index()
         {
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
-            UserEditViewModel userEditViewModel = new UserEditViewModel();
-            userEditViewModel.name = values.Name;
-            userEditViewModel.surname = values.Surname;
-            userEditViewModel.phonenumber = values.PhoneNumber;
-            userEditViewModel.mail = values.Email;
+            UserEditDTO userEditViewModel = new UserEditDTO();
+            userEditViewModel.Name = values.Name;
+            userEditViewModel.Surname = values.Surname;
+            userEditViewModel.PhoneNumber = values.PhoneNumber;
+            userEditViewModel.Email = values.Email;
             return View(userEditViewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(UserEditViewModel p)
+        public async Task<IActionResult> Index(UserEditDTO p)
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            if (p.Image != null)
+            if (p.ImageURL != null)
             {
                 var resource = Directory.GetCurrentDirectory();
-                var extension = Path.GetExtension(p.Image.FileName);
+                var extension = Path.GetExtension(p.ImageFile.FileName);
                 var imagename = Guid.NewGuid() + extension;
                 var savelocation = resource + "/wwwroot/userimages/" + imagename;
                 var stream = new FileStream(savelocation, FileMode.Create);
-                await p.Image.CopyToAsync(stream);
+                await p.ImageFile.CopyToAsync(stream);
                 user.ImageURL = imagename;
             }
-            user.Name = p.name;
-            user.Surname = p.surname;
-            user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, p.password);
-            user.PhoneNumber = p.phonenumber;
+            user.Name = p.Name;
+            user.Surname = p.Surname;
+            user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, p.Password);
+            user.PhoneNumber = p.PhoneNumber;
             var result = await _userManager.UpdateAsync(user);
             if (result.Succeeded)
             {

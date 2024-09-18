@@ -23,18 +23,16 @@ using Microsoft.AspNetCore.Hosting;
 using FitSalon.WebUI.Mapping.AutoMapperProfile;
 using FitSalon.WebUI.CQRS.Handlers.ServiceHandlers;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 // Add services to the container.
 builder.Services.AddLogging(x =>
 {
     x.ClearProviders();
     x.AddFile($"{Directory.GetCurrentDirectory()}\\LogFile\\log.txt", LogLevel.Error);
-
 });
 
+builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
     options.Cookie.HttpOnly = true;
@@ -42,7 +40,12 @@ builder.Services.AddSession(options =>
 });
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddTokenProvider<DataProtectorTokenProvider<AppUser>>(TokenOptions.DefaultProvider).AddEntityFrameworkStores<Context>();
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+
+builder.Services.AddIdentity<AppUser, AppRole>()
+    .AddEntityFrameworkStores<Context>()
+    .AddTokenProvider<DataProtectorTokenProvider<AppUser>>(TokenOptions.DefaultProvider);
+
 builder.Services.AddDbContext<Context>();
 builder.Services.AddHttpClient();
 
@@ -52,19 +55,10 @@ builder.Services.AddScoped<CreateServiceCommandHandler>();
 builder.Services.AddScoped<DeleteServiceCommandHandler>();
 builder.Services.AddScoped<UpdateServiceCommandHandler>();
 
-builder.Services.AddMediatR(typeof(Program)); //MediatR'ý kullanabilme parametresi.
-
-
+builder.Services.AddMediatR(typeof(Program)); // MediatR'ý kullanabilme parametresi.
 Extensions.ContainerDependencies(builder.Services);
-
 builder.Services.AddAutoMapper(typeof(MapProfile).Assembly);
-
-builder.Services.AddControllersWithViews();
-
-Extensions.ContainerDependencies(builder.Services);
 Extensions.CustomValidator(builder.Services);
-
-
 
 builder.Services.AddMvc(config =>
 {
@@ -76,13 +70,11 @@ builder.Services.Configure<IdentityOptions>(options =>
 {
     options.Password.RequireDigit = true;
     options.Password.RequiredLength = 8;
-    options.Password.RequireUppercase = true; // En az bir büyük harf zorunluluðu
-    options.Password.RequireLowercase = true; // En az bir küçük harf zorunluluðu
+    options.Password.RequireUppercase = true;
+    options.Password.RequireLowercase = true;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequiredUniqueChars = 3;
 });
-// Register your service here
-builder.Services.AddMvc();
 
 builder.Services.PostConfigure<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme, options =>
 {
@@ -95,27 +87,13 @@ var app = builder.Build();
 
 app.Use(async (context, next) =>
 {
-    if (context.Request.Path.Equals("/Member", StringComparison.OrdinalIgnoreCase))
+    if (context.Request.Path.Equals("/Member", StringComparison.OrdinalIgnoreCase) ||
+        context.Request.Path.Equals("/Member/", StringComparison.OrdinalIgnoreCase))
     {
         context.Response.Redirect("/Member/Dashboard");
     }
-    else if (context.Request.Path.Equals("/Member/", StringComparison.OrdinalIgnoreCase))
-    {
-        context.Response.Redirect("/Member/Dashboard");
-    }
-    else
-    {
-        await next();
-    }
-});
-
-app.Use(async (context, next) =>
-{
-    if (context.Request.Path.Equals("/Admin", StringComparison.OrdinalIgnoreCase))
-    {
-        context.Response.Redirect("/Admin/Dashboard");
-    }
-    else if (context.Request.Path.Equals("/Admin/", StringComparison.OrdinalIgnoreCase))
+    else if (context.Request.Path.Equals("/Admin", StringComparison.OrdinalIgnoreCase) ||
+        context.Request.Path.Equals("/Admin/", StringComparison.OrdinalIgnoreCase))
     {
         context.Response.Redirect("/Admin/Dashboard");
     }
@@ -129,48 +107,23 @@ app.Use(async (context, next) =>
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
-
-
-app.UseSession();
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseSession(); // Ensure session is used before authentication and authorization
+app.UseRouting();
 app.UseAuthentication();
+app.UseAuthorization();
 app.UseStatusCodePagesWithReExecute("/Error/Error404", "?code={0}");
 
-app.UseRouting();
-
-app.UseAuthorization();
-
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-      name: "areas",
-      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-    );
-});
-
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-      name: "areas",
-      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-    );
-});
 
 app.Run();

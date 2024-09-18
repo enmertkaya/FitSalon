@@ -1,0 +1,159 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- FontAwesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<!-- FullCalendar CSS -->
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css' rel='stylesheet' />
+
+<div class="container mt-4">
+    <div id="calendar" class="mb-3"></div>
+
+    <div id="footer" class="d-flex justify-content-between mt-3">
+        <button id="todayButton" class="btn btn-primary"><i class="fas fa-calendar-day"></i> Bugün</button>
+        <button id="nextFourDaysButton" class="btn btn-primary"><i class="fas fa-calendar-plus"></i> Önümüzdeki 4 Gün</button>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.3/perfect-scrollbar.min.js"></script>
+
+
+<!-- Bootstrap Notify (jQuery'den sonra ekleniyor) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+
+<!-- FullCalendar ve diğer scriptler -->
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+<script src="~/fullcalendar-6.1.15/packages/core/locales/tr.global.min.js"></script>
+<script src="~/fullcalendar-6.1.15/packages/core/locales/tr.global.js"></script>
+
+<!-- Soft UI Dashboard (Tek seferde yükleniyor) -->
+
+@* <script src="~/soft-ui-dashboard/assets/js/soft-ui-dashboard.min.js"></script>
+<script src="~/soft-ui-dashboard/assets/js/soft-ui-dashboard.js"></script> *@
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+
+        // Calendar yapılandırması
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            locale: 'tr', // Takvimi Türkçe yapar
+            initialView: 'timeGridWeek', // İlk olarak haftalık görünümü göster
+            allDaySlot: false, // Tüm gün slotunu kaldır
+            contentHeight: 450, // İçerik yüksekliği
+            headerToolbar: {
+                left: 'prev,next,today', // Sol tarafta yer alan butonlar
+                center: 'title', // Ortada başlık
+                right: 'dayGridMonth,timeGridWeek,timeGridDay', // Sağdaki butonlar
+            },
+            titleFormat: {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            },
+            slotDuration: '00:30:00', // 30 dakikalık slot
+            slotLabelInterval: '00:30', // Yarım saatlik aralıklar
+            slotLabelFormat: {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false // 24 saat formatı
+            },
+            // Görünüm yapılandırmaları
+            views: {
+                timeGridWeek: {
+                    slotDuration: '00:30:00',
+                    slotMinTime: '08:00:00', // Haftalık görünüm için minimum saat
+                    slotMaxTime: '21:00:00'  // Haftalık görünüm için maksimum saat
+                },
+                timeGridDay: {
+                    slotDuration: '00:30:00',
+                    slotMinTime: '08:00:00', // Günlük görünüm için minimum saat
+                    slotMaxTime: '21:00:00'  // Günlük görünüm için maksimum saat
+                },
+                timeGridForFourDay: {
+                    type: 'timeGrid',
+                    duration: { days: 4 },
+                    slotMinTime: '08:00:00', // 4 günlük görünüm için minTime
+                    slotMaxTime: '21:00:00', // 4 günlük görünüm için maxTime
+                    buttonText: '4 Gün'
+                }
+            },
+            hiddenDays: [0] // Pazar gününü gizle
+        });
+
+        // Takvimi başlat
+        calendar.render();
+
+        // Bugün butonuna tıklayınca
+        document.getElementById('todayButton').addEventListener('click', function () {
+            calendar.gotoDate(new Date());
+        });
+
+        // Önümüzdeki 4 gün butonuna tıklayınca
+        document.getElementById('nextFourDaysButton').addEventListener('click', function () {
+            var today = new Date();
+            today.setDate(today.getDate() + 1);
+            calendar.gotoDate(today);
+            calendar.changeView('timeGridForFourDay');
+        });
+    });
+</script>
+
+<!-- CSS kısmı -->
+<style>
+    body {
+        overflow-x: hidden; /* Yatay taşmayı engeller */
+    }
+
+    #calendar {
+        max-width: 100%; /* Takvimin maksimum genişliği %100 */
+        overflow: hidden; /* Taşmayı gizle */
+    }
+
+    /* Başlık alanı için mavi renk */
+    .fc-toolbar-title {
+        color: #007bff; /* Mavi renk */
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .fc-header-toolbar .fc-button {
+        margin: 0 5px; /* Butonlar arasındaki boşluk */
+    }
+
+    .fc-header-toolbar .fc-button {
+        background-color: #007bff; /* Mavi arka plan */
+        color: white; /* Beyaz yazı rengi */
+        border: none; /* Kenarlık yok */
+        border-radius: 5px; /* Yuvarlak köşeler */
+    }
+
+        .fc-header-toolbar .fc-button:hover {
+            background-color: #0056b3; /* Hover efekti için daha koyu mavi */
+        }
+
+    /* Saat aralıklarının rengi */
+    .fc-timegrid-slot-label {
+        color: #007bff; /* Mavi renk */
+        font-weight: bold;
+    }
+
+    /* Footer butonlarının stili */
+    #footer button {
+        padding: 10px 15px;
+        border: none;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+        background-color: #007bff; /* Mavi arka plan */
+    }
+
+        #footer button:hover {
+            background-color: #0056b3; /* Hover efekti için daha koyu mavi */
+        }
+</style>

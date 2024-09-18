@@ -1,56 +1,70 @@
-﻿@model FitSalon.WebUI.Areas.Member.Models.UserEditViewModel
-
+﻿@model FitSalon.DtoLayer.DTOs.MemberDTOs.UserEditDTO
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Profil Güncelleme Sayfası</h4>
-                <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-                <div class="heading-elements">
-                    <ul class="list-inline mb-0">
-                        <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                        <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-                        <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                        <li><a data-action="close"><i class="ft-x"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-content collapse show">
-                <div class="card-body">
-                    <p class="card-text">Profil ile ilgili bilgilerinizi bu sayfadan güncelleyebilirsiniz</p>
-                    <form method="post" enctype="multipart/form-data">
-                        @Html.Label("Adınız")
-                        <input type="text" asp-for="name" class="form-control" />
-                        <br />
-                        @Html.Label("Soyadınız")
-                        <input type="text" asp-for="surname" class="form-control" />
-                        <br />
-                        @Html.Label("Mail Adresiniz")
-                        <input type="text" asp-for="mail" class="form-control" />
-                        <br />
-                        @Html.Label("Şifreniz")
-                        <input type="text" asp-for="password" class="form-control" />
-                        <br />
-                        @Html.Label("Şifre Tekrar")
-                        <input type="text" asp-for="confirmpassword" class="form-control" />
-                        <br />
-                        @Html.Label("Telefon Numarası")
-                        <input type="text" asp-for="phonenumber" class="form-control" />
-                        <br />
-                        <div class="form-group">
-                            <label>Resim Seçin</label>
-                            <input type="file" asp-for="Image" />
-                        </div>
-                        <br />
-                        <button class="btn btn-primary">Bilgileri Güncelle</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+
+<h1>Profil Düzenleme</h1>
+<form method="post" enctype="multipart/form-data">
+    @Html.Label("Adınız: ")
+    <input type="text" asp-for="Name" class="form-control" required />
+    <span asp-validation-for="Name" class="text-danger"></span>
+    <br />
+    @Html.Label("Soyadınız: ")
+    <input type="text" asp-for="Surname" class="form-control" required />
+    <span asp-validation-for="Surname" class="text-danger"></span>
+    <br />
+    @Html.Label("E-posta Adresiniz: ")
+    <input type="text" asp-for="Email" class="form-control" required />
+    <span asp-validation-for="Email" class="text-danger"></span>
+    <div class="text-danger">
+        <ul class="error-list">
+
+            <li>@Html.ValidationSummary(true, "", new { @class = "text-danger" })</li>
+
+        </ul>
     </div>
-</div>
+    @Html.Label("Telefon Numarası: ")
+    <input type="tel" asp-for="PhoneNumber" class="form-control" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" maxlength="12" />
+    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    <br />
+    <div class="form-group col-auto">
+        @if (ViewBag.ImageURL != null)
+        {
+            <div class="avatar avatar-xl position-relative">
+                <img src="/UserImages/@ViewBag.ImageURL" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+            </div>
+        }
+        else
+        {
+            <p>Profil Fotoğrafı Yok</p>
+        }
+        <label>Profil Görseli Seçin: </label>
+        <input type="file" asp-for="ImageFile" />
+    </div>
+    <a href="/Member/Profile/RemoveProfileImage" class="btn btn-sm btn-outline-dark">Profili Görselini Kaldır</a>
+    <br />
+    @Html.Label("Parolanız: ")
+    <input type="password" asp-for="Password" class="form-control" required />
+    <span asp-validation-for="Password" class="text-danger"></span>
+    <br />
+    @Html.Label("Parola tekrar girin: ")
+    <input type="password" asp-for="ConfirmPassword" class="form-control" required />
+    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    <br />
+    <button class="btn btn-success">Profili Kaydet</button>
+</form>
+<style>
+
+    .text-danger ul {
+        list-style-type: none; /* Madde işaretlerini kaldırır */
+        padding-left: 0; /* Sol boşluğu kaldırır */
+        margin: 0; /* Üst ve alt boşlukları kaldırır */
+    }
+
+    .text-danger li {
+        margin-bottom: 0.5rem; /* Liste elemanları arasında küçük boşluk bırakır */
+    }
+
+</style>
 

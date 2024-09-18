@@ -29,7 +29,7 @@ namespace FitSalon.BusinessLayer.Concrete
 
         public List<Reservation> GetAllReservation()
         {
-           return _reservationDal.GetAllReservation();
+            return _reservationDal.GetAllReservation();
         }
 
         public List<Reservation> GetListWithReservationByApproved(int id)
@@ -60,7 +60,7 @@ namespace FitSalon.BusinessLayer.Concrete
 
         public Reservation TGetByID(int id)
         {
-           return _reservationDal.GetByID(id);
+            return _reservationDal.GetByID(id);
         }
 
         public List<Reservation> TGetList()
@@ -80,7 +80,7 @@ namespace FitSalon.BusinessLayer.Concrete
 
         public void WaitingApproveReservation(int id)
         {
-           _reservationDal.WaitingApproveReservation(id);
+            _reservationDal.WaitingApproveReservation(id);
         }
     }
 }

@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace FitSalon.BusinessLayer.Abstract
 {
-	public interface IServiceService : IGenericService<Service>
-	{
+    public interface IServiceService : IGenericService<Service>
+    {
 
         public Service TGetServiceWithEmployee(int id);
         public List<Service> TGetLast4Services();

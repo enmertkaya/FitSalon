@@ -1,4 +1,5 @@
-﻿using FitSalon.BusinessLayer.Abstract;
+﻿
+using FitSalon.BusinessLayer.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitSalon.WebUI.ViewComponents.MemberDashboard

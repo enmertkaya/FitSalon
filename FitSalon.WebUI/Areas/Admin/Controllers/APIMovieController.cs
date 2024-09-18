@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using FitSalon.WebUI.Areas.Admin.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FitSalon.WebUI.Areas.Admin.Controllers
 {
@@ -11,24 +11,31 @@ namespace FitSalon.WebUI.Areas.Admin.Controllers
     {
         public async Task<IActionResult> Index()
         {
-            List<APIMovieViewModel> apiMovies = new List<APIMovieViewModel>();
+            APIMovieViewModel weather = new APIMovieViewModel();
             var client = new HttpClient();
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri("https://imdb-top-100-movies.p.rapidapi.com/"),
+                RequestUri = new Uri("https://open-weather13.p.rapidapi.com/city/istanbul/TR"),
                 Headers =
-    {
-            { "x-rapidapi-key", "5304a69aacmsh6fc15023f51c452p19bc34jsn7ab26621b258" },
-        { "x-rapidapi-host", "imdb-top-100-movies.p.rapidapi.com" },
-    },
+                {
+                    { "x-rapidapi-key", "a87e92a2f9msh6806a9acff11590p1c7dbbjsn31fbdd15a414" },
+                    { "x-rapidapi-host", "open-weather13.p.rapidapi.com" },
+                },
             };
+
             using (var response = await client.SendAsync(request))
             {
                 response.EnsureSuccessStatusCode();
                 var body = await response.Content.ReadAsStringAsync();
-                apiMovies = JsonConvert.DeserializeObject<List<APIMovieViewModel>>(body);
-                return View(apiMovies);
+                var weatherData = JsonConvert.DeserializeObject<dynamic>(body);
+
+                weather.City = weatherData.name;
+                weather.Temperature = weatherData.main.temp + " °C";
+                weather.WeatherDescription = weatherData.weather[0].description;
+                weather.Icon = "http://openweathermap.org/img/w/" + weatherData.weather[0].icon + ".png";
+
+                return View(weather);
             }
         }
     }

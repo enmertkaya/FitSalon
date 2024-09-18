@@ -8,7 +8,7 @@ using FitSalon.WebUI.Areas.Admin.Models;
 
 namespace FitSalon.WebUI.Areas.Admin.Controllers
 {
-    [AllowAnonymous]
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
 
     public class AccountController : Controller

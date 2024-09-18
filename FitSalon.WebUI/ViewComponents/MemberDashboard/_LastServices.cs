@@ -1,4 +1,5 @@
-﻿using FitSalon.BusinessLayer.Abstract;
+﻿
+using FitSalon.BusinessLayer.Abstract;
 using FitSalon.BusinessLayer.Concrete;
 using FitSalon.DataAccessLayer.EntityFramework;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,7 @@ namespace FitSalon.WebUI.ViewComponents.MemberDashboard
     {
         ServiceManager serviceManager = new ServiceManager(new EFServiceDal());
 
-        
+
 
         public IViewComponentResult Invoke()
         {
