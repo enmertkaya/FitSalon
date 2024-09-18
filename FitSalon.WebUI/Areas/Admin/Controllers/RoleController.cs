@@ -41,17 +41,27 @@ namespace FitSalon.WebUI.Areas.Admin.Controllers
             var result = await _roleManager.CreateAsync(role);
             if (result.Succeeded)
             {
+<<<<<<< HEAD
                 return Redirect("/Admin/Role/Index"); ;
 
             }
             return Redirect("/Admin/Role/Index"); ;
+=======
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+>>>>>>> origin/master
         }
 
         public async Task<IActionResult> DeleteRole(int id)
         {
             var value = _roleManager.Roles.FirstOrDefault(x => x.Id == id);
             await _roleManager.DeleteAsync(value);
+<<<<<<< HEAD
             return Redirect("/Admin/Role/Index"); ;
+=======
+            return RedirectToAction("Index");
+>>>>>>> origin/master
         }
 
 
@@ -73,7 +83,11 @@ namespace FitSalon.WebUI.Areas.Admin.Controllers
             var value = _roleManager.Roles.FirstOrDefault(x => x.Id == p.RoleID);
             value.Name = p.RoleName;
             await _roleManager.UpdateAsync(value);
+<<<<<<< HEAD
             return Redirect("/Admin/Role/Index"); ;
+=======
+            return RedirectToAction("Index");
+>>>>>>> origin/master
 
         }
 
@@ -119,7 +133,11 @@ namespace FitSalon.WebUI.Areas.Admin.Controllers
                     await _userManager.RemoveFromRoleAsync(user, item.RoleName);
                 }
             }
+<<<<<<< HEAD
             return Redirect("/Admin/Role/Index"); ;
+=======
+            return RedirectToAction("UserList");
+>>>>>>> origin/master
         }
     }
 }

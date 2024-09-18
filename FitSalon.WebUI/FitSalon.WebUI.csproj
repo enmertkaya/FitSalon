@@ -82,10 +82,13 @@
     <None Include="Areas\Admin\Views\EmployeeMediatR\AddEmployee.cshtml" />
     <None Include="Areas\Admin\Views\EmployeeMediatR\GetEmployee.cshtml" />
     <None Include="Areas\Admin\Views\EmployeeMediatR\Index.cshtml" />
+<<<<<<< HEAD
     <None Include="Areas\Admin\Views\FeatureImages\EditImage.cshtml" />
     <None Include="Areas\Admin\Views\FeatureImages\Index.cshtml" />
     <None Include="Areas\Admin\Views\Reservation\EditReservation.cshtml" />
     <None Include="Areas\Admin\Views\Reservation\Index.cshtml" />
+=======
+>>>>>>> origin/master
     <None Include="Areas\Admin\Views\Role\AddRole.cshtml" />
     <None Include="Areas\Admin\Views\Role\AssignRole.cshtml" />
     <None Include="Areas\Admin\Views\Role\EditRole.cshtml" />
