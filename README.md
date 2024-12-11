@@ -44,6 +44,6 @@ Ajanda Görünümü;
 Rol Yönetimi;
 ![image](https://github.com/user-attachments/assets/c7f309a7-f424-48eb-b6fc-50041c9a3f1e)
 
-
+Üyelere ait spor ekranı ;
 
 
